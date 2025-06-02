@@ -8,7 +8,7 @@ from time import sleep
 from kafka import KafkaProducer
 
 
-
+import warnings
 warnings.filterwarnings("ignore", category=UserWarning, module='sklearn')
 warnings.filterwarnings("ignore", category=FutureWarning, module='pandas')
 
