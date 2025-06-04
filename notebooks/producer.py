@@ -7,11 +7,6 @@ from time import sleep
 
 from kafka import KafkaProducer
 
-
-import warnings
-warnings.filterwarnings("ignore", category=UserWarning, module='sklearn')
-warnings.filterwarnings("ignore", category=FutureWarning, module='pandas')
-
 if __name__ == "__main__":
     SERVER = "broker:9092"
 
@@ -51,5 +46,5 @@ if __name__ == "__main__":
             }
             producer.send("car_test1", value=message)
             sleep(1)
-    except KeyboardInterr:
+    except KeyboardInterrupt:
         producer.close()
