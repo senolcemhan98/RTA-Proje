@@ -16,26 +16,33 @@ if __name__ == "__main__":
         api_version=(3, 7, 0),
     )
     # Configsgit
-    width, height = 800, 600
-    car_x, car_y = 0, height//2 - 25  # Initial position
+    car_x, car_y = 50, 200  # Initial position
 
     # Initialize GPS1 and vis settings
-    gps_1_std = 20
-    point_radius = 3
+    gps_1_std = 15
     gps_2_std = 5
     # Initialize GPS2 and vis settings
-    gps_2_1_std = 31
-    gps_2_2_std = 9
+    gps_2_1_std = 10
+    gps_2_2_std = 6
     try:
         while True:
             
             t = datetime.now() + timedelta(seconds=random.randint(-15, 0))
-            car_x = car_x + 5
-            y_offset = 25 # When drawing we are drawing 25 thats why We are adding here
+
+            if car_x < 100: 
+                car_x = car_x + 10
+            elif car_x == 100:
+                car_y = car_y - 10
+                if car_y <= 130:
+                    car_x = car_x + 10
+            else: 
+                car_x = car_x + 10
+
+             
             gps1_x = np.random.normal(car_x, gps_1_std)
             gps1_y = np.random.normal(car_y, gps_1_std)
             gps2_x = np.random.normal(car_x, gps_2_1_std)
-            gps2_y = np.random.normal(car_y, gps_2_2_std) + y_offset 
+            gps2_y = np.random.normal(car_y, gps_2_2_std) 
             
             
             message = {
@@ -44,7 +51,8 @@ if __name__ == "__main__":
                 "GP1" : (gps1_x,gps1_y),
                 "GP2" : (gps2_x,gps2_y)
             }
-            producer.send("car_test1", value=message)
+            producer.send("car_test4", value=message)
+            print(message)
             sleep(1)
     except KeyboardInterrupt:
         producer.close()

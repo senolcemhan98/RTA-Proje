@@ -26,7 +26,7 @@ def calculate_distance(point1, point2):
 
 def main():
     SERVER = "broker:9092"
-    TOPIC = "car_test1"
+    TOPIC = "car_test2"
 
     consumer = KafkaConsumer(
         TOPIC,
